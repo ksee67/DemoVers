@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище FishDataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID_Active" />
+          </Key>
+          <Property Name="ID_Active" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Add" Type="date" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Count_Ed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discription" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FishingResults">
+          <Key>
+            <PropertyRef Name="ID_FishingResult" />
+          </Key>
+          <Property Name="ID_FishingResult" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RibalkaID" Type="int" Nullable="false" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="QuantityCaught" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FishStock">
+          <Key>
+            <PropertyRef Name="ID_FishStock" />
+          </Key>
+          <Property Name="ID_FishStock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Pond" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ribalka">
+          <Key>
+            <PropertyRef Name="ID_Ribalka" />
+          </Key>
+          <Property Name="ID_Ribalka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="0" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Pond" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Instructor" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesOrders">
+          <Key>
+            <PropertyRef Name="ID_SalesOrder" />
+          </Key>
+          <Property Name="ID_SalesOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__FishingRe__Activ__59FA5E80">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="FishingResults" Type="Self.FishingResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="FishingResults">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FishingRe__Ribal__59063A47">
+          <End Role="Ribalka" Type="Self.Ribalka" Multiplicity="1" />
+          <End Role="FishingResults" Type="Self.FishingResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ribalka">
+              <PropertyRef Name="ID_Ribalka" />
+            </Principal>
+            <Dependent Role="FishingResults">
+              <PropertyRef Name="RibalkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FishStock__Activ__4CA06362">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="FishStock" Type="Self.FishStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="FishStock">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalesOrde__Activ__5DCAEF64">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="SalesOrders" Type="Self.SalesOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="SalesOrders">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalesOrde__UserI__5CD6CB2B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SalesOrders" Type="Self.SalesOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="SalesOrders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__5441852A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FishDataBaseModelContainer">
+          <EntitySet Name="Active" EntityType="Self.Active" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FishingResults" EntityType="Self.FishingResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FishStock" EntityType="Self.FishStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ribalka" EntityType="Self.Ribalka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__FishingRe__Activ__59FA5E80" Association="Self.FK__FishingRe__Activ__59FA5E80">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="FishingResults" EntitySet="FishingResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FishingRe__Ribal__59063A47" Association="Self.FK__FishingRe__Ribal__59063A47">
+            <End Role="Ribalka" EntitySet="Ribalka" />
+            <End Role="FishingResults" EntitySet="FishingResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FishStock__Activ__4CA06362" Association="Self.FK__FishStock__Activ__4CA06362">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="FishStock" EntitySet="FishStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalesOrde__Activ__5DCAEF64" Association="Self.FK__SalesOrde__Activ__5DCAEF64">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="SalesOrders" EntitySet="SalesOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalesOrde__UserI__5CD6CB2B" Association="Self.FK__SalesOrde__UserI__5CD6CB2B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SalesOrders" EntitySet="SalesOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__5441852A" Association="Self.FK__Users__RoleID__5441852A">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FishDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID_Active" />
+          </Key>
+          <Property Name="ID_Active" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Add" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Count_Ed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FishingResults" Relationship="Self.FK__FishingRe__Activ__59FA5E80" FromRole="Active" ToRole="FishingResults" />
+          <NavigationProperty Name="FishStock" Relationship="Self.FK__FishStock__Activ__4CA06362" FromRole="Active" ToRole="FishStock" />
+          <NavigationProperty Name="SalesOrders" Relationship="Self.FK__SalesOrde__Activ__5DCAEF64" FromRole="Active" ToRole="SalesOrders" />
+        </EntityType>
+        <EntityType Name="FishingResults">
+          <Key>
+            <PropertyRef Name="ID_FishingResult" />
+          </Key>
+          <Property Name="ID_FishingResult" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RibalkaID" Type="Int32" Nullable="false" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="QuantityCaught" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Active" Relationship="Self.FK__FishingRe__Activ__59FA5E80" FromRole="FishingResults" ToRole="Active" />
+          <NavigationProperty Name="Ribalka" Relationship="Self.FK__FishingRe__Ribal__59063A47" FromRole="FishingResults" ToRole="Ribalka" />
+        </EntityType>
+        <EntityType Name="FishStock">
+          <Key>
+            <PropertyRef Name="ID_FishStock" />
+          </Key>
+          <Property Name="ID_FishStock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Pond" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Active" Relationship="Self.FK__FishStock__Activ__4CA06362" FromRole="FishStock" ToRole="Active" />
+        </EntityType>
+        <EntityType Name="Ribalka">
+          <Key>
+            <PropertyRef Name="ID_Ribalka" />
+          </Key>
+          <Property Name="ID_Ribalka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="Pond" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Instructor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FishingResults" Relationship="Self.FK__FishingRe__Ribal__59063A47" FromRole="Ribalka" ToRole="FishingResults" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_Role" />
+          </Key>
+          <Property Name="ID_Role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__5441852A" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SalesOrders">
+          <Key>
+            <PropertyRef Name="ID_SalesOrder" />
+          </Key>
+          <Property Name="ID_SalesOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="OrderStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Active" Relationship="Self.FK__SalesOrde__Activ__5DCAEF64" FromRole="SalesOrders" ToRole="Active" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__SalesOrde__UserI__5CD6CB2B" FromRole="SalesOrders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__5441852A" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="SalesOrders" Relationship="Self.FK__SalesOrde__UserI__5CD6CB2B" FromRole="Users" ToRole="SalesOrders" />
+        </EntityType>
+        <Association Name="FK__FishingRe__Activ__59FA5E80">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="FishingResults" Type="Self.FishingResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="FishingResults">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FishStock__Activ__4CA06362">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="FishStock" Type="Self.FishStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="FishStock">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalesOrde__Activ__5DCAEF64">
+          <End Role="Active" Type="Self.Active" Multiplicity="1" />
+          <End Role="SalesOrders" Type="Self.SalesOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Active">
+              <PropertyRef Name="ID_Active" />
+            </Principal>
+            <Dependent Role="SalesOrders">
+              <PropertyRef Name="ActiveID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FishingRe__Ribal__59063A47">
+          <End Role="Ribalka" Type="Self.Ribalka" Multiplicity="1" />
+          <End Role="FishingResults" Type="Self.FishingResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ribalka">
+              <PropertyRef Name="ID_Ribalka" />
+            </Principal>
+            <Dependent Role="FishingResults">
+              <PropertyRef Name="RibalkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__5441852A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Role" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalesOrde__UserI__5CD6CB2B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="SalesOrders" Type="Self.SalesOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="SalesOrders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FishDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Active" EntityType="Self.Active" />
+          <EntitySet Name="FishingResults" EntityType="Self.FishingResults" />
+          <EntitySet Name="FishStock" EntityType="Self.FishStock" />
+          <EntitySet Name="Ribalka" EntityType="Self.Ribalka" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__FishingRe__Activ__59FA5E80" Association="Self.FK__FishingRe__Activ__59FA5E80">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="FishingResults" EntitySet="FishingResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FishStock__Activ__4CA06362" Association="Self.FK__FishStock__Activ__4CA06362">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="FishStock" EntitySet="FishStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalesOrde__Activ__5DCAEF64" Association="Self.FK__SalesOrde__Activ__5DCAEF64">
+            <End Role="Active" EntitySet="Active" />
+            <End Role="SalesOrders" EntitySet="SalesOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FishingRe__Ribal__59063A47" Association="Self.FK__FishingRe__Ribal__59063A47">
+            <End Role="Ribalka" EntitySet="Ribalka" />
+            <End Role="FishingResults" EntitySet="FishingResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__5441852A" Association="Self.FK__Users__RoleID__5441852A">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalesOrde__UserI__5CD6CB2B" Association="Self.FK__SalesOrde__UserI__5CD6CB2B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SalesOrders" EntitySet="SalesOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FishDataBaseModelContainer" CdmEntityContainer="FishDataBaseEntities">
+          <EntitySetMapping Name="Active">
+            <EntityTypeMapping TypeName="FishDataBaseModel.Active">
+              <MappingFragment StoreEntitySet="Active">
+                <ScalarProperty Name="ID_Active" ColumnName="ID_Active" />
+                <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Count_Ed" ColumnName="Count_Ed" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FishingResults">
+            <EntityTypeMapping TypeName="FishDataBaseModel.FishingResults">
+              <MappingFragment StoreEntitySet="FishingResults">
+                <ScalarProperty Name="ID_FishingResult" ColumnName="ID_FishingResult" />
+                <ScalarProperty Name="RibalkaID" ColumnName="RibalkaID" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="QuantityCaught" ColumnName="QuantityCaught" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FishStock">
+            <EntityTypeMapping TypeName="FishDataBaseModel.FishStock">
+              <MappingFragment StoreEntitySet="FishStock">
+                <ScalarProperty Name="ID_FishStock" ColumnName="ID_FishStock" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Pond" ColumnName="Pond" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ribalka">
+            <EntityTypeMapping TypeName="FishDataBaseModel.Ribalka">
+              <MappingFragment StoreEntitySet="Ribalka">
+                <ScalarProperty Name="ID_Ribalka" ColumnName="ID_Ribalka" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Pond" ColumnName="Pond" />
+                <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FishDataBaseModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrders">
+            <EntityTypeMapping TypeName="FishDataBaseModel.SalesOrders">
+              <MappingFragment StoreEntitySet="SalesOrders">
+                <ScalarProperty Name="ID_SalesOrder" ColumnName="ID_SalesOrder" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FishDataBaseModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

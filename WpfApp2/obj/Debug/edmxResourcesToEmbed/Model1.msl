@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище FishDataBaseModelContainer" CdmEntityContainer="FishDataBaseEntities">
+    <EntitySetMapping Name="Active">
+      <EntityTypeMapping TypeName="FishDataBaseModel.Active">
+        <MappingFragment StoreEntitySet="Active">
+          <ScalarProperty Name="ID_Active" ColumnName="ID_Active" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Count_Ed" ColumnName="Count_Ed" />
+          <ScalarProperty Name="Discription" ColumnName="Discription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FishingResults">
+      <EntityTypeMapping TypeName="FishDataBaseModel.FishingResults">
+        <MappingFragment StoreEntitySet="FishingResults">
+          <ScalarProperty Name="ID_FishingResult" ColumnName="ID_FishingResult" />
+          <ScalarProperty Name="RibalkaID" ColumnName="RibalkaID" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="QuantityCaught" ColumnName="QuantityCaught" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FishStock">
+      <EntityTypeMapping TypeName="FishDataBaseModel.FishStock">
+        <MappingFragment StoreEntitySet="FishStock">
+          <ScalarProperty Name="ID_FishStock" ColumnName="ID_FishStock" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Pond" ColumnName="Pond" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ribalka">
+      <EntityTypeMapping TypeName="FishDataBaseModel.Ribalka">
+        <MappingFragment StoreEntitySet="Ribalka">
+          <ScalarProperty Name="ID_Ribalka" ColumnName="ID_Ribalka" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Pond" ColumnName="Pond" />
+          <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="FishDataBaseModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="ID_Role" ColumnName="ID_Role" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrders">
+      <EntityTypeMapping TypeName="FishDataBaseModel.SalesOrders">
+        <MappingFragment StoreEntitySet="SalesOrders">
+          <ScalarProperty Name="ID_SalesOrder" ColumnName="ID_SalesOrder" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FishDataBaseModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
